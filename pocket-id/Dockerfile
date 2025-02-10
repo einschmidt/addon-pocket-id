@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM ghcr.io/pocket-id/pocket-id:v0.30
 
 # Install jq for JSON parsing
-RUN apk add --no-cache jq
+RUN apk add --no-cache jq=1.6-r2
 
 # Copy custom startup script
 COPY run.sh /app/scripts/docker/run.sh
