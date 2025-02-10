@@ -2,6 +2,7 @@ ARG BUILD_FROM
 FROM ghcr.io/pocket-id/pocket-id:v0.30
 
 # Install jq for JSON parsing
+# hadolint ignore=DL3018
 RUN apk add --no-cache jq
 
 # Copy custom startup script
