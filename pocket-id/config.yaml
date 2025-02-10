@@ -1,7 +1,7 @@
 ---
 name: Pocket ID
 version: dev
-slug: pocketid
+slug: pocket-id
 description: Simple OIDC provider for passkey authentication
 arch:
   - amd64
