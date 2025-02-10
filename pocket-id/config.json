@@ -1,14 +1,12 @@
 {
     "name": "Pocket ID",
-    "version": "0.26",
+    "version": "dev",
     "slug": "pocket_id",
     "description": "Simple OIDC provider for passkey authentication",
     "arch": [
         "amd64",
         "aarch64"
     ],
-    "startup": "application",
-    "boot": "auto",
     "options": {
         "PUBLIC_APP_URL": "http://localhost",
         "TRUST_PROXY": false,
