@@ -1,5 +1,5 @@
 {
-  "name": "Pocket ID",
+  "name": "Pocket-ID",
   "version": "dev",
   "slug": "pocket_id",
   "description": "Simple OIDC provider for passkey authentication",
