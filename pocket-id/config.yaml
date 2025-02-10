@@ -3,6 +3,7 @@ name: Pocket ID
 version: dev
 slug: pocket-id
 description: Simple OIDC provider for passkey authentication
+url: https://github.com/einschmidt/addon-pocket-id
 arch:
   - amd64
   - aarch64
