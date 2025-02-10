@@ -13,9 +13,6 @@ RUN chmod +x /app/scripts/docker/*.sh
 # Set `run.sh` as ENTRYPOINT
 ENTRYPOINT ["sh", "/app/scripts/docker/run.sh"]
 
-CMD ["sh", "/app/scripts/docker/create-user.sh"]
-CMD []
-
 # Add-on Labels
 LABEL \
   io.hass.name="${BUILD_NAME}" \
