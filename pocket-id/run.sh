@@ -10,9 +10,13 @@ if [ ! -f "$CONFIG_PATH" ]; then
 fi
 
 # Extract values from JSON and handle potential null values
-export PUBLIC_APP_URL=$(jq -r '.PUBLIC_APP_URL // "http://localhost"' "$CONFIG_PATH")
-export TRUST_PROXY=$(jq -r '.TRUST_PROXY // "false"' "$CONFIG_PATH")
-export MAXMIND_LICENSE_KEY=$(jq -r '.MAXMIND_LICENSE_KEY // ""' "$CONFIG_PATH")
+PUBLIC_APP_URL=$(jq -r '.PUBLIC_APP_URL // "http://localhost"' "$CONFIG_PATH")
+TRUST_PROXY=$(jq -r '.TRUST_PROXY // "false"' "$CONFIG_PATH")
+MAXMIND_LICENSE_KEY=$(jq -r '.MAXMIND_LICENSE_KEY // ""' "$CONFIG_PATH")
+
+export PUBLIC_APP_URL
+export TRUST_PROXY
+export MAXMIND_LICENSE_KEY
 
 # Debug output to verify values
 echo "Exported environment variables:"
