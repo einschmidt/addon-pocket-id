@@ -1,6 +1,6 @@
-# Home Assistant Add-on: Pocket-ID
+# Home Assistant Add-on: Pocket ID
 
-Home Assistant add-on for passkey authentication via OIDC based on Pocket-ID.
+Home Assistant add-on for passkey authentication via OIDC based on [Pocket ID](https://pocket-id.org/).
 
 ## About
 
