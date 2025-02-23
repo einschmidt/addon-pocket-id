@@ -11,10 +11,10 @@
       "fileMatch": ["/Dockerfile$", "/build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
-        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
+        "ARG BUILD_FROM=(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
+        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
       ],
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "ghcr"
     },
     {
       "customType": "regex",
@@ -35,11 +35,7 @@
     },
     {
       "groupName": "Add-on base image",
-      "matchDatasources": ["docker"]
-    },
-    {
-      "groupName": "Add-on base image",
-      "matchDatasources": ["docker"],
+      "matchDatasources": ["docker", "ghcr"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
