@@ -11,25 +11,11 @@
   "semanticCommits": "enabled",
   "customManagers": [
     {
-      "customType": "regex",
-      "fileMatch": [
-        "^build.yaml$"
-      ],
+      "fileMatch": ["/Dockerfile$", "/build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\\s+(?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)"
-      ],
-      "datasourceTemplate": "docker",
-      "versioningTemplate": "semver"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^Dockerfile$"
-      ],
-      "matchStringsStrategy": "any",
-      "matchStrings": [
-        "FROM (?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)"
+        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
+        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
@@ -56,18 +42,14 @@
       "automerge": true
     },
     {
-      "groupName": "Base Images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "automerge": true,
-      "matchPackageNames": [
-        "/ghcr.io/pocket-id/pocket-id/"
-      ]
+      "groupName": "Add-on base image",
+      "matchDatasources": ["docker"]
+    },
+    {
+      "groupName": "Add-on base image",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
