@@ -16,7 +16,8 @@
           "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
         ]
       ],
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
@@ -37,9 +38,18 @@
     },
     {
       "groupName": "Add-on base image",
+      "matchDatasources": ["docker"]
+    },
+    {
+      "groupName": "Add-on base image",
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
     }
   ]
 }
