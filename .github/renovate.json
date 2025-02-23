@@ -11,10 +11,8 @@
       "fileMatch": ["/Dockerfile$", "/build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "matchStrings": [
-          "ARG BUILD_FROM=(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
-          "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
-        ]
+        "ARG BUILD_FROM=(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
+        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
