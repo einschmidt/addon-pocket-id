@@ -12,7 +12,10 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^Dockerfile$", "^build.yaml$"],
+      "fileMatch": [
+        "^Dockerfile$",
+        "^build.yaml$"
+      ],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>[a-zA-Z0-9-_./]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
@@ -23,7 +26,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^Dockerfile$"],
+      "fileMatch": [
+        "^Dockerfile$"
+      ],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9-]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
@@ -35,15 +40,24 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["repology"],
+      "matchDatasources": [
+        "repology"
+      ],
       "automerge": true
     },
     {
       "groupName": "Base Images",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["ghcr.io/pocket-id/pocket-id"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "matchPackageNames": [
+        "/ghcr.io/pocket-id/pocket-id/"
+      ]
     }
   ]
 }
