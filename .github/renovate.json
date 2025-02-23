@@ -11,20 +11,19 @@
   "semanticCommits": "enabled",
   "customManagers": [
     {
-      "fileMatch": ["/Dockerfile$", "/build.yaml$"],
+      "customType": "regex",
+      "fileMatch": ["^Dockerfile$", "^build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
-        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
+        "ARG BUILD_FROM=(?<depName>[a-zA-Z0-9-_./]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
+        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>[a-zA-Z0-9-_./]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^Dockerfile$"
-      ],
+      "fileMatch": ["^Dockerfile$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9-]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
@@ -36,18 +35,13 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": [
-        "repology"
-      ],
+      "matchDatasources": ["repology"],
       "automerge": true
     },
     {
-      "groupName": "Add-on base image",
-      "matchDatasources": ["docker"]
-    },
-    {
-      "groupName": "Add-on base image",
+      "groupName": "Base Images",
       "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["ghcr.io/pocket-id/pocket-id"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
