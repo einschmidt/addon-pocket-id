@@ -5,6 +5,7 @@
   "labels": ["dependencies", "no-stale"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
+  "semanticCommits": true,
   "customManagers": [
     {
       "customType": "regex",
@@ -12,7 +13,7 @@
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
-        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)[\"']?\\s"
+        "\\s+(?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
@@ -35,19 +36,11 @@
       "automerge": true
     },
     {
-      "groupName": "Add-on base image",
-      "matchDatasources": ["docker"]
-    },
-    {
-      "groupName": "Add-on base image",
+      "groupName": "Base Images",
       "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["ghcr.io/pocket-id/pocket-id"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["major"],
-      "automerge": false
     }
   ]
 }
