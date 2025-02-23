@@ -2,33 +2,34 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rebaseWhen": "behind-base-branch",
   "dependencyDashboard": true,
-  "labels": [
-    "dependencies",
-    "no-stale"
-  ],
+  "labels": ["dependencies", "no-stale"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
-  "semanticCommits": "enabled",
+  "semanticCommits": true,
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "/Dockerfile$",
-        "/build.yaml$"
-      ],
+      "fileMatch": ["^build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "ARG BUILD_FROM=(?<depName>.*?):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)\\s+",
-        "\\s+(?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):v(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)"
+        "\\s+(?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "semver"
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "/Dockerfile$"
+      "fileMatch": ["^Dockerfile$"],
+      "matchStringsStrategy": "any",
+      "matchStrings": [
+        "FROM (?<depName>ghcr\\.io/[a-zA-Z0-9-_]+/[a-zA-Z0-9-_]+):(?<currentValue>v?\\d+\\.\\d+(?:\\.\\d+)?)"
       ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^Dockerfile$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9-]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
@@ -40,24 +41,15 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": [
-        "repology"
-      ],
+      "matchDatasources": ["repology"],
       "automerge": true
     },
     {
       "groupName": "Base Images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "automerge": true,
-      "matchPackageNames": [
-        "/ghcr.io/pocket-id/pocket-id/"
-      ]
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["ghcr.io/pocket-id/pocket-id"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
