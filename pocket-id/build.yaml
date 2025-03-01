@@ -1,6 +1,6 @@
 ---
 build_from:
-  aarch64: ghcr.io/pocket-id/pocket-id:v0.35.3
-  amd64: ghcr.io/pocket-id/pocket-id:v0.35.3
+  aarch64: ghcr.io/pocket-id/pocket-id:v0.35.4
+  amd64: ghcr.io/pocket-id/pocket-id:v0.35.4
 codenotary:
   signer: codenotary@schmidtnb.de
