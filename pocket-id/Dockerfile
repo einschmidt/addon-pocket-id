@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.io/pocket-id/pocket-id:v0.36.0
+FROM ghcr.io/pocket-id/pocket-id:v0.37.0
 
 # Install jq for JSON parsing
 # hadolint ignore=DL3018
