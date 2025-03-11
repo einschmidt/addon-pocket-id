@@ -13,14 +13,16 @@ fi
 PUBLIC_APP_URL=$(jq -r '.PUBLIC_APP_URL // "http://localhost"' "$CONFIG_PATH")
 TRUST_PROXY=$(jq -r '.TRUST_PROXY // "false"' "$CONFIG_PATH")
 MAXMIND_LICENSE_KEY=$(jq -r '.MAXMIND_LICENSE_KEY // ""' "$CONFIG_PATH")
+UPDATE_CHECK_DISABLED=true
 
 export PUBLIC_APP_URL
 export TRUST_PROXY
 export MAXMIND_LICENSE_KEY
+export UPDATE_CHECK_DISABLED
 
 # Debug output to verify values
 echo "Exported environment variables:"
-env | grep -E 'PUBLIC_APP_URL|TRUST_PROXY'
+env | grep -E 'PUBLIC_APP_URL|TRUST_PROXY|UPDATE_CHECK_DISABLED'
 
 # Run create-user.sh first
 echo "Running create-user.sh..."
