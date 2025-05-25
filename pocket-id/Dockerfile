@@ -6,13 +6,13 @@ FROM ghcr.io/pocket-id/pocket-id:v1.0.0
 RUN apk add --no-cache jq
 
 # Copy custom startup script
-COPY run.sh /app/scripts/docker/run.sh
+COPY run.sh /app/docker/run.sh
 
 # Ensure correct permissions for Home Assistant add-ons
-RUN chmod +x /app/scripts/docker/*.sh
+RUN chmod +x /app/docker/*.sh
 
 # Set `run.sh` as ENTRYPOINT
-ENTRYPOINT ["sh", "/app/scripts/docker/run.sh"]
+ENTRYPOINT ["sh", "/app/docker/run.sh"]
 
 # Add-on Labels
 LABEL \
