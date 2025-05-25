@@ -24,10 +24,6 @@ export UPDATE_CHECK_DISABLED
 echo "Exported environment variables:"
 env | grep -E 'APP_URL|TRUST_PROXY|UPDATE_CHECK_DISABLED'
 
-# Run create-user.sh first
-echo "Running create-user.sh..."
-sh /app/scripts/docker/create-user.sh
-
 # Run entrypoint.sh
 echo "Running entrypoint.sh..."
-exec sh /app/scripts/docker/entrypoint.sh
+exec sh /app/docker/entrypoint.sh
