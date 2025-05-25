@@ -2,20 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rebaseWhen": "behind-base-branch",
   "dependencyDashboard": true,
-  "labels": [
-    "dependencies",
-    "no-stale"
-  ],
+  "labels": ["dependencies", "no-stale"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
   "semanticCommits": "enabled",
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "/Dockerfile$",
-        "/build.yaml$"
-      ],
+      "fileMatch": ["/Dockerfile$", "/build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
@@ -26,9 +20,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^Dockerfile$"
-      ],
+      "fileMatch": ["^Dockerfile$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9-]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
@@ -40,24 +32,15 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": [
-        "repology"
-      ],
+      "matchDatasources": ["repology"],
       "automerge": true
     },
     {
       "groupName": "Base Images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
-      "matchPackageNames": [
-        "/ghcr.io/pocket-id/pocket-id/"
-      ]
+      "matchPackageNames": ["/ghcr.io/pocket-id/pocket-id/"]
     }
   ]
 }
