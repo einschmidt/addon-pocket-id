@@ -8,16 +8,16 @@ arch:
   - amd64
   - aarch64
 options:
-  PUBLIC_APP_URL: http://localhost
+  APP_URL: http://localhost
   TRUST_PROXY: false
   MAXMIND_LICENSE_KEY:
 schema:
-  PUBLIC_APP_URL: str
+  APP_URL: str
   TRUST_PROXY: bool
   MAXMIND_LICENSE_KEY: str?
 ports:
-  80/tcp: 7080
+  1411/tcp: 7080
 map:
   - type: data
-    path: /app/backend/data
+    path: /app/data
 init: false
