@@ -20,14 +20,13 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^Dockerfile$"],
-      "matchStringsStrategy": "any",
+      "fileMatch": ["/Dockerfile$"],
       "matchStrings": [
-        "\\s\\s(?<package>[a-z0-9-]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
+        "ARG POCKET_ID_VERSION=[\"']?(?<currentValue>v[\\d.]+)[\"']?"
       ],
-      "versioningTemplate": "semver-coerced",
-      "datasourceTemplate": "repology",
-      "depNameTemplate": "alpine_3_21/{{package}}"
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "pocket-id/pocket-id",
+      "versioningTemplate": "semver"
     }
   ],
   "packageRules": [
@@ -36,11 +35,14 @@
       "automerge": true
     },
     {
-      "groupName": "Base Images",
+      "groupName": "Add-on base image",
+      "matchDatasources": ["docker"]
+    },
+    {
+      "groupName": "Add-on base image",
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "matchPackageNames": ["/ghcr.io/pocket-id/pocket-id/"]
+      "automerge": true
     }
   ]
 }
