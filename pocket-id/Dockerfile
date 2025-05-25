@@ -1,18 +1,36 @@
 ARG BUILD_FROM
-FROM ghcr.io/pocket-id/pocket-id:v1.0.0
+# hadolint ignore=DL3006
+FROM $BUILD_FROM
 
-# Install jq for JSON parsing
-# hadolint ignore=DL3018
-RUN apk add --no-cache jq
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy custom startup script
-COPY run.sh /app/docker/run.sh
+# Set pocket-id version
+ARG POCKET_ID_VERSION="v1.0.0"
 
-# Ensure correct permissions for Home Assistant add-ons
-RUN chmod +x /app/docker/*.sh
+# Install Pocket ID
+ARG BUILD_ARCH=amd64
+RUN \
+    set -eux \
+    \
+    && if [[ "$BUILD_ARCH" = "aarch64" ]]; then ARCH="arm64"; fi \
+    && if [[ "$BUILD_ARCH" = "amd64" ]]; then ARCH="amd64"; fi \
+    \
+    && curl -J -L -o /usr/local/bin/pocket-id "https://github.com/pocket-id/pocket-id/releases/download/${POCKET_ID_VERSION}/pocket-id-linux-${ARCH}" \
+    \
+    && chmod +x /usr/local/bin/pocket-id
 
-# Set `run.sh` as ENTRYPOINT
-ENTRYPOINT ["sh", "/app/docker/run.sh"]
+# Copy root filesystem
+COPY rootfs /
+
+# Build arguments
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
 
 # Add-on Labels
 LABEL \
