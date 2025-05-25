@@ -1,0 +1,34 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Add-on: pocket-id
+# Runs Pocket ID
+# ==============================================================================
+
+bashio::log.info 'Starting Pocket ID...'
+
+# Check if pocket-id binary exists
+if [ -f /usr/local/bin/pocket-id ]; then
+    bashio::log.debug 'Pocket ID binary found!'
+else
+    bashio::log.error 'Pocket ID binary not found at /usr/local/bin/pocket-id'
+    exit 1
+fi
+
+# Set variables
+export APP_URL="$(bashio::config 'APP_URL')"
+export TRUST_PROXY="$(bashio::config 'TRUST_PROXY')"
+
+bashio::log.debug "APP_URL value: $APP_URL"
+bashio::log.debug "TRUST_PROXY value: $TRUST_PROXY"
+
+if bashio::config.has_value 'MAXMIND_LICENSE_KEY'; then
+    bashio::log.debug 'MAXMIND_LICENSE_KEY has been configured. Setting environment variable...'
+    export MAXMIND_LICENSE_KEY="$(bashio::config 'MAXMIND_LICENSE_KEY')"
+else
+    bashio::log.debug 'No MAXMIND_LICENSE_KEY set in configuration.'
+fi
+
+# Run pocket-id
+bashio::log.info 'Running Pocket ID...'
+exec /usr/local/bin/pocket-id
