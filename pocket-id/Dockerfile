@@ -16,9 +16,10 @@ RUN \
     && if [[ "$BUILD_ARCH" = "aarch64" ]]; then ARCH="arm64"; fi \
     && if [[ "$BUILD_ARCH" = "amd64" ]]; then ARCH="amd64"; fi \
     \
-    && curl -J -L -o /usr/local/bin/pocket-id "https://github.com/pocket-id/pocket-id/releases/download/${POCKET_ID_VERSION}/pocket-id-linux-${ARCH}" \
+    && mkdir -p /app \
+    && curl -J -L -o /app/pocket-id "https://github.com/pocket-id/pocket-id/releases/download/${POCKET_ID_VERSION}/pocket-id-linux-${ARCH}" \
     \
-    && chmod +x /usr/local/bin/pocket-id
+    && chmod +x /app/pocket-id
 
 # Copy root filesystem
 COPY rootfs /

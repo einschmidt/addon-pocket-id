@@ -19,3 +19,6 @@ schema:
 ports:
   1411/tcp: 1411
 init: false
+map:
+  - type: data
+    path: /app/data
