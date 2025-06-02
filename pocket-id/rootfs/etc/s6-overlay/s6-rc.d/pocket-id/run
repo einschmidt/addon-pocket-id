@@ -8,10 +8,10 @@
 bashio::log.info 'Starting Pocket ID...'
 
 # Check if pocket-id binary exists
-if [ -f /usr/local/bin/pocket-id ]; then
+if [ -f /app/pocket-id ]; then
     bashio::log.debug 'Pocket ID binary found!'
 else
-    bashio::log.error 'Pocket ID binary not found at /usr/local/bin/pocket-id'
+    bashio::log.error 'Pocket ID binary not found at /app/pocket-id'
     exit 1
 fi
 
@@ -31,4 +31,8 @@ fi
 
 # Run pocket-id
 bashio::log.info 'Running Pocket ID...'
-exec /usr/local/bin/pocket-id
+
+# Change working directory so relative paths like file:data/pocket-id.db work
+cd /app || bashio::exit.nok 'Failed to cd into /app'
+
+exec ./pocket-id
