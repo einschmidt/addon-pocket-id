@@ -29,6 +29,9 @@ else
     bashio::log.debug 'No MAXMIND_LICENSE_KEY set in configuration.'
 fi
 
+APP_LOG_LEVEL="$(bashio::string.lower "$(bashio::config 'log_level')" )"
+export LOG_LEVEL="${APP_LOG_LEVEL}"
+
 # Run pocket-id
 bashio::log.info 'Running Pocket ID...'
 
